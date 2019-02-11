@@ -4,7 +4,6 @@ public class Board {
 
     private String[][] displayMatrix;
     private int[][] shipLocations;
-    private int[] spotsHit;
 
     public Board() {
         this.displayMatrix = new String[5][5] ;
@@ -13,7 +12,6 @@ public class Board {
     public void setMatrix(String[][] newMatrix){
         this.displayMatrix = newMatrix;
     }
-
 
     public void setShipLocations(int[][] shipLocations) {
         this.shipLocations = shipLocations;
@@ -32,13 +30,11 @@ public class Board {
         return false;
     }
 
-    public Boolean hit(int row, int column) {
+    public int hit(int row, int column) {
         if ( checkHit(row,column) ) {
-            this.displayMatrix[row][column] = "x";
-            return true;
+            addToDisplayMatrix(row,column,"x");
         }else {
-            this.displayMatrix[row][column] = "*";
-            return false;
+            addToDisplayMatrix(row,column,"o");
         }
 
     }
@@ -63,6 +59,21 @@ public class Board {
         }
         return matrix;
     }
+
+    private Boolean checkIfValidPosition(int row, int column) {
+        if ( row < 5 && column < 5 ) {
+            if (this.displayMatrix[row][column].equals("~") ){
+                return true;
+            } else { return false; }
+        }
+        else { return false; }
+    }
+
+    private void addToDisplayMatrix(int row, int column, String value) {
+        this.displayMatrix[row][column] = value;
+    }
+
+
 
 
 }
